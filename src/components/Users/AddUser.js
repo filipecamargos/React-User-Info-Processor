@@ -10,6 +10,7 @@ const AddUser = (props) => {
   //Variable States
   const [userName, setUserName] = useState("");
   const [userAge, setUserAge] = useState("");
+  const [error, setError] = useState();
 
   //Handle the add user event
   const addUserHandler = (event) => {
@@ -17,9 +18,18 @@ const AddUser = (props) => {
 
     //validation
     if (userName.trim().length === 0 || userAge.trim().length === 0) {
+      setError({
+        title: "Invalid input!",
+        message: "Please enter a valid name and age!",
+      });
+
       return;
     }
     if (+userAge < 1) {
+      setError({
+        title: "Invalid age!",
+        message: "Please enter a valid age!",
+      });
       return;
     }
 
@@ -35,6 +45,12 @@ const AddUser = (props) => {
     setUserAge("");
   };
 
+  //handle the error
+  const errorHandler = () => {
+    setError(null);
+  };
+
+
   //Handle the userName entered
   const userNameEnteredHandler = (event) => {
     setUserName(event.target.value);
@@ -47,7 +63,7 @@ const AddUser = (props) => {
 
   return (
     <div>
-      <ErrorBox title="An error occured!" message="Somthing went Wrong" />
+      {error && <ErrorBox title={error.title} message={error.message} onConfirm={errorHandler} />}
       <Card className={classes.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
