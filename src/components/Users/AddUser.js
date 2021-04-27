@@ -22,6 +22,13 @@ const AddUser = (props) => {
       return;
     }
 
+    //call the add user
+    props.onAddUser({
+      name: userName,
+      age: userAge,
+      id: Math.random().toString(),
+    });
+
     //Reset the state
     setUserName("");
     setUserAge("");
