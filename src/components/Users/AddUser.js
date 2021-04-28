@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import ErrorBox from "../UI/ErrorBox";
-import Wrapper from "../Helpers/Wrapper";
 
 import classes from "./AddUser.module.css";
 
@@ -62,7 +61,7 @@ const AddUser = (props) => {
   };
 
   return (
-    <Wrapper>
+    <Fragment>
       {error && (
         <ErrorBox
           title={error.title}
@@ -89,7 +88,7 @@ const AddUser = (props) => {
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </Wrapper>
+    </Fragment>
   );
 };
 
