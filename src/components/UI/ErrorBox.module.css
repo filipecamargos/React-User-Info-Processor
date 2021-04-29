@@ -15,10 +15,15 @@
     width: 80%;
     z-index: 100;
     overflow: hidden;
+    background-color: grey;
+}
+
+.modal p {
+    color: white;
 }
 
 .header {
-    background: #4f005f;
+    background: blue;
     padding: 1rem;
 }
 

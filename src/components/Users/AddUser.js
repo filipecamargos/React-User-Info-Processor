@@ -13,7 +13,8 @@ const AddUser = (props) => {
   const ageRef = useRef();
 
   //Variable state to handle errors
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
 
   //Handle the add user event
   const addUserHandler = (event) => {
@@ -21,19 +22,22 @@ const AddUser = (props) => {
     
     //get the values from the reference ref
     const enteredName = nameRef.current.value;
-    const enteredAge = nameRef.current.value;
+    const enteredAge = ageRef.current.value;
 
     //validation
     if (enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
-      setError({
+      setError(true);
+      setErrorMessage({
         title: "Invalid input!",
         message: "Please enter a valid name and age!",
       });
 
       return;
     }
+ 
     if (+enteredAge < 1) {
-      setError({
+      setError(true);
+      setErrorMessage({
         title: "Invalid age!",
         message: "Please enter a valid age!",
       });
@@ -54,15 +58,16 @@ const AddUser = (props) => {
 
   //handle the error
   const errorHandler = () => {
-    setError(null);
+    setError(false);
+    setErrorMessage(null);
   };
 
   return (
     <Fragment>
       {error && (
         <ErrorBox
-          title={error.title}
-          message={error.message}
+          title={errorMessage.title}
+          message={errorMessage.message}
           onConfirm={errorHandler}
         />
       )}
